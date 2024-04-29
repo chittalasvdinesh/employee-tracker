@@ -38,7 +38,7 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
                 body: JSON.stringify({ ...formDataObject })
             })
             if (res.ok) {
-                const updatedRes = await fetch("http://localhost:3000/api/users");
+                const updatedRes = await fetch("/api/users");
                 const updatedData = await updatedRes.json();
                 setUserData(updatedData)
                 setAddStatus(false)
@@ -179,7 +179,7 @@ export default Users;
 export const getServerSideProps = async () => {
     // let loading=true;
     try {
-        const res = await fetch('http://localhost:3000/api/users');
+        const res = await fetch('/api/users');
         if (res.status === 404) {
             return {
                 notFound: true // Return a special flag for Next.js to handle 404 errors
