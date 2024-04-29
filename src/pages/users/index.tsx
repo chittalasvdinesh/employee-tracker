@@ -1,5 +1,5 @@
 import Error from "next/error"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 type FormData = { id: number, fname: string, lname: string }
 
@@ -12,23 +12,22 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
     const [errorStatus, setErrorStatus] = useState<{ fname: boolean, lname: boolean }>({ fname: false, lname: false })
 
     const url=process.env.NEXT_PUBLIC_BASE_URL;
-    console.log(url)
 
-  useEffect(()=>{
-    const fetchApi=async()=>{
-        try {
-            const res=await fetch(`${url}api/users`);
-            const data=await res.json(); 
-            setUserData(data)
-        } catch (error) {
-            console.log(error)
-        }
+//   useEffect(()=>{
+//     const fetchApi=async()=>{
+//         try {
+//             const res=await fetch(`${url}api/users`);
+//             const data=await res.json(); 
+//             setUserData(data)
+//         } catch (error) {
+//             console.log(error)
+//         }
        
-    }
+//     }
 
-    fetchApi()
+//     fetchApi()
 
-  },[])
+//   },[])
 
     const onUserSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -195,34 +194,34 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
 
 export default Users;
 
-// export const getServerSideProps = async () => {
-//     // let loading=true;
-//     try {
-//         const res = await fetch(`${process.env.BASE_URL}/api/users`);
-//         if (res.status === 404) {
-//             return {
-//                 notFound: true // Return a special flag for Next.js to handle 404 errors
-//             };
-//         }
-//         if(!res.ok){
-//             throw new Error({statusCode:500})
-//         }
+export const getServerSideProps = async () => {
+    // let loading=true;
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`);
+        if (res.status === 404) {
+            return {
+                notFound: true // Return a special flag for Next.js to handle 404 errors
+            };
+        }
+        if(!res.ok){
+            throw new Error({statusCode:500})
+        }
 
-//         const data = await res.json()
-//         console.log("dataaaaa",data,res)
-//         // loading=false
-//         return {
-//             props: { errorCode: null, data }
-//         }
-//     } catch (error: any) {
-//         // loading=false
-//         console.log("error", error)
-//         const errorCode = error?.status|| 500;
-//         return {
-//             props: { errorCode: errorCode,data:[] }
-//         }
-//     }
+        const data = await res.json()
+        console.log("dataaaaa",data,res)
+        // loading=false
+        return {
+            props: { errorCode: null, data }
+        }
+    } catch (error: any) {
+        // loading=false
+        console.log("error", error)
+        const errorCode = error?.status|| 500;
+        return {
+            props: { errorCode: errorCode,data:[] }
+        }
+    }
 
 
 
-// }
+}
