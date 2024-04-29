@@ -56,7 +56,7 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
                 body: JSON.stringify({ ...formDataObject })
             })
             if (res.ok) {
-                const updatedRes = await fetch(`${url}api/users/api/users`);
+                const updatedRes = await fetch(`${url}api/users`);
                 const updatedData = await updatedRes.json();
                 setUserData(updatedData)
                 setAddStatus(false)
