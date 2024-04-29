@@ -1,5 +1,5 @@
 import Error from "next/error"
-import { ReactEventHandler, useState } from "react"
+import { useState } from "react"
 
 type FormData = { id: number, fname: string, lname: string }
 
@@ -55,7 +55,7 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
 
     }
 
-    const onChangeSearch = (e:any) => {
+    const onChangeSearch = (e:React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
         setFilterText(e.target.value)
     }
