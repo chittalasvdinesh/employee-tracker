@@ -28,7 +28,7 @@ const Users = ({ data, errorCode }: { data: [], errorCode: any }) => {
 
 
         const updatedUrl = editFormData === null ? '/api/users' : `/api/users/${formDataObject.id}`
-        console.log(formDataObject)
+        console.log(formDataObject,updatedUrl)
         try {
             const res = await fetch(updatedUrl, {
                 method: editFormData === null ? "POST" : "PUT",
